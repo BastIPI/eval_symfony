@@ -1,0 +1,45 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %}{{ blogpost.title }}{% endblock %}
+
+{% block content %}
+
+<style>
+        .container-fluid {
+            padding:25px;
+        }
+        .container-fluid .title { 
+            font-size:25px;
+        }
+        .container-fluid .date { 
+            font-size:18px;
+        }
+        .container-fluid .featured { 
+            float:right;
+        }
+        .container-fluid .featured .fa { 
+            font-size:20px;
+        }
+        p {
+            margin:15px;
+            padding:10px;
+            background-color:#efefef;
+            border:#cccccc 1px solid;
+        }
+    </style>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+                <div class="title">{{ blogpost.title }}</div>
+                <div class="date">{{ blogpost.date | date('d/m/Y H:i:s') }}</div>
+            </div>
+            <div class="col-4">
+                {% if blogpost.featured == true %}
+                    <div class="featured">Featured <i class="fas fa-star"></i></div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <p>{{ blogpost.content }}</p>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        {% include 'layout/header.html.twig' %}
+        {% include 'layout/menu.html.twig' %}
+
+        {% block content %}{% endblock %}
+
+        {% include 'layout/footer.html.twig' %}
+{% endblock %}

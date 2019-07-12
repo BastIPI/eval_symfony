@@ -1,0 +1,58 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<style>
+    h3 {
+        padding:15px 0 0 35px;
+    }
+    .card {
+        margin:20px 50px;
+    }
+    .card-header .title { 
+        font-size:18px;
+    }
+    .card-header .date { 
+        font-size:12px;
+    }
+    .card-header .featured { 
+        float:right;
+    }
+    .card-header .featured .fa { 
+        font-size:20px;
+    }
+    .card-body {
+        overflow:hidden;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<h3>Tous les posts</h3>
+
+    {% for blogpost in blogposts %}
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="title"><a href="{{ path('blogpost_show_slug', {'slug': blogpost.slug}) }}">{{ blogpost.title }}</a></div>
+                        <div class="date">{{ blogpost.date | date('d/m/Y H:i:s') }}</div>
+                    </div>
+                    <div class="col-4">
+                        {% if blogpost.featured == true %}
+                            <div class="featured">Featured <i class="fas fa-star"></i></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                {{ blogpost.content }}
+            </div>
+        </div>
+    {% else %}
+        <h5>Aucun post trouvé</h5>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    h3 {
+        padding:15px 0 0 35px;
+    }
+    .dashboard{
+        padding:20px;
+    }
+    table {
+        table-layout: fixed;
+    }
+    th {
+        background-color:#353032;
+        color:#ededed;
+    }
+    td {
+        overflow: hidden;
+        white-space: nowrap; 
+        text-overflow: ellipsis;
+        border:#898989 1px solid;
+        padding:1px;
+        font-size:12px;
+    }
+</style>
+    <h3>Panneau de contrôle</h3>
+    <div class="container-fluid dashboard">
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="width:3%">Id</th>
+                <th style="width:15%">Titre</th>
+                <th style="width:12%">Slug</th>
+                <th style="width:40%">Contenu</th>
+                <th style="width:10%">Date</th>
+                <th style="width:10%">Catégorie</th>
+                <th style="width:5%">Featured</th>
+                <th style="width:5%"></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for blogpost in blogposts %}
+            <tr>
+                <td style="padding:2px;text-align:center">{{ blogpost.id }}</td>
+                <td style="padding:2px;">{{ blogpost.title }}</td>
+                <td style="padding:2px;">{{ blogpost.slug }}</td>
+                <td style="padding:2px;">{{ blogpost.content }}</td>
+                <td style="padding:2px;text-align:center">{{ blogpost.date | date('d/m/Y H:i:s') }}</td>
+                <td style="padding:2px;text-align:center">{{ blogpost.category.name }}</td>
+                <td style="padding:2px;text-align:center">{{ blogpost.featured ? 'oui' : 'non' }}</td>
+                <td style="padding:2px;text-align:center">
+                    <a href="{{ path('admin_edit_post', {'id': blogpost.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">Aucun post trouvé</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
